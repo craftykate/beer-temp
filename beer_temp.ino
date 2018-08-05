@@ -5,10 +5,12 @@
  * 
  * Log temperature of beer's water bath to thingspeak.com and serial monitor if connected every 5 minutes
  * If temperature falls outside of acceptable range, text Kevin
+ * If temperature WAS outside of the range and now isn't, text Kevin that it's okay again
  * Change RGB LED: Red for too hot, Blue for too cold, Green if fine
  * 
  * INSTRUCTIONS:
  * Change lowerRange and upperRange variables 
+ * Input your own values for the WiFi and Channel parameters
  * Ground Pin 0 before uploading new code. Undo when operating in the wild
  */
 

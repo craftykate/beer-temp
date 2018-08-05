@@ -99,7 +99,7 @@ I colored the legs of the resistor so you can see better how it goes. See how on
 Go to Sketch > Include Libraries > Manage Libraries and download the OneWire library and the DallasTemperature library. I played around with it to make sure I could get it working right before moving on. I wrote a small program that takes the temp and spits it out to the serial monitor. 
 
 **Test it with some code** <br/>
-Here's my sensor set up in the Arduino IDE before the setup function:
+Here's my sensor set up in the Arduino IDE before the setup function. Note that the white wire of my sensor is plugged into pin 4. Change that for your setup:
 
 ```c++
 // INCLUDE LIBRARIES
@@ -113,25 +113,47 @@ Here's my sensor set up in the Arduino IDE before the setup function:
 OneWire oneWire(ONE_WIRE_BUS);
 // Pass oneWire reference to Dallas Temperature. 
 DallasTemperature sensors(&oneWire);
+// Variable to store temp
+float temp;
 ```
 
-In the setup function:
+The setup function starts the temp library and begins the Serial monitor convo:
 
 ```c++
-// Start up the temperature library
-sensors.begin();
+void setup() {
+  // Start up the temperature library
+  sensors.begin();
+
+  // Start serial port
+  Serial.begin(9600);
+}
 ```
 
-And here is how I get the temp:
+The loop gets the temp and prints it to serial every 1 second:
 
 ```c++
-// Send the command to get temperatures
-sensors.requestTemperatures(); 
-// Use the function ByIndex, and get the temperature from the first sensor only
-temp = sensors.getTempFByIndex(0);
+void loop() {
+
+  // GET TEMP
+  // call sensors.requestTemperatures() to issue a global temperature request to all devices on the bus
+  Serial.print("Requesting temperatures...");
+  // Send the command to get temperatures
+  sensors.requestTemperatures(); 
+  // Use the function ByIndex, and get the temperature from the first sensor only
+  temp = sensors.getTempFByIndex(0);
+  Serial.println("DONE");
+  
+  // PRINT TEMP TO SERIAL
+  Serial.print("Temperature is: ");
+  Serial.println(temp);  
+
+  // Wait one second before doing it again
+  delay(1000);
+
+}
 ```
 
-That last line gets the Farenheit from the first sensor (your only sensor). You'll obviously need more - set up the serial communication, declare your temp variable, output the temp variable to serial etc, but those are the specific lines to get the temp sensor working and hopefully get you a proper reading.
+`temp = sensors.getTempFByIndex(0);` gets the Farenheit from the first sensor (your only sensor). That little program should get your temp sensor working and hopefully get you a proper reading. Remember to ground pin 0 when uploading if you had to do that before. 
 
 <a name="setuprgbled"></a>
 ### Finally - set up the RGB LED 

@@ -102,6 +102,10 @@ Go to Sketch > Include Libraries > Manage Libraries and download the OneWire lib
 Here's my sensor set up in the Arduino IDE before the setup function:
 
 ```c++
+// INCLUDE LIBRARIES
+#include <OneWire.h> 
+#include <DallasTemperature.h> 
+
 // TEMP SENSOR SET UP
 // Data wire is plugged into port 4 on the Arduino
 #define ONE_WIRE_BUS 4

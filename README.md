@@ -164,7 +164,7 @@ The longest leg connects to ground, the other legs connect to pins on your board
 If you're playing along at home, I connected the red leg to pin 12, the green leg to pin 13 and the blue leg to pin 16.
 
 **Test it out with some code** <br/>
-Before your setup function establish which color goes to which pins:
+Before your setup function establish which color goes to which pins (change the numbers depending on which pins your legs are plugged into:
 ```c++
 // LED pins
 int RedPin = 12;
@@ -172,11 +172,40 @@ int GreenPin = 13;
 int BluePin = 16;
 ```
 
+In your set up function you'll need to set up the pins as outputs:
+```c++
+void setup() {
+  // Set up RGB LED
+  pinMode(RedPin, OUTPUT);
+  pinMode(GreenPin, OUTPUT);
+  pinMode(BluePin, OUTPUT);
+}
+```
+
 Then in your loop function try turning on the various legs like this:
 ```c++
-digitalWrite(RedPin, LOW);
-digitalWrite(GreenPin, LOW);
-digitalWrite(BluePin, HIGH);
+void loop() {
+  // Turn LED Red
+  digitalWrite(RedPin, HIGH);
+  digitalWrite(GreenPin, LOW);
+  digitalWrite(BluePin, LOW);
+  // Wait one second
+  delay(1000);
+  
+  // Turn LED Green
+  digitalWrite(RedPin, LOW);
+  digitalWrite(GreenPin, HIGH);
+  digitalWrite(BluePin, LOW);
+  // Wait one second
+  delay(1000);
+  
+  // Turn LED Blue
+  digitalWrite(RedPin, LOW);
+  digitalWrite(GreenPin, LOW);
+  digitalWrite(BluePin, HIGH);
+  // Wait one second
+  delay(1000);
+}
 ```
 That's it! That's all the hardware. Hopefully you're able to upload a basic blinky program to the ESP8266, you can read the correct temp and output it to serial and you can change the colors on your LED. Now we program!
 

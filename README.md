@@ -24,6 +24,7 @@ A WiFi-enabled temperature sensor that uploads data online and texts when the te
 * [Putting It All Together](#puttingitalltogether)
   * [Caveats](#caveats)
 * [Conclusion](#conclusion)
+* [But Wait, There's More](#butwait)
 * [What's Next](#whatsnext)
 
 <a name="background"></a>
@@ -211,6 +212,10 @@ That's it! That's all the hardware. Hopefully you're able to upload a basic blin
 
 Little guy in all its breadboardy glory:<br/>
 ![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_version.JPG) <br/>
+I ended up adding buttons (see [But Wait, There's More](#butwait) so Kevin could adjust the upper and lower range himself without me needing to connect the device to the computer! Here it is in its final state without the ESP8266 and then with the ESP8266 so you can see the connections underneath it:
+![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_final.JPG) 
+![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_final_with_esp.JPG) <br/>
+All I need to do now is build a permanent enclosure!
 
 <a name="connecttointernet"></a>
 ## Connect to the Internet 
@@ -347,10 +352,10 @@ Or my second or third or fourth or 9th. Maybe somewhere around 15, I've lost cou
 ## In Conclusion 
 I hope you enjoyed that and if you're a n00b like I was you feel like you learned something. I'm still learning and I bet I got a few things wrong here and there, but all this worked for me so hopefully it can help someone else. 
 
-<a name="whatsnext"></a>
-## What's Next 
-Right now the little guy is on a breadboard with temporary jumpers coming out of it. I'm going to make it more permanent and put it in an enclosure of some sort. I'll update pics when I've done that, but first I need to figure out the next part:
+<a name="butwait"></a>
+## But Wait, There's More
+Originally the acceptable temperature range would get hardcoded into the program by me. When Kevin brews a new beer I would need to change the values in the program and upload it again. But once I finished programming it Kevin said he wanted to be able to adjust the upper and lower temperature ranges himself. The first 24 hours the beer will need to be in one range and then for several days after it will need to be in another. I thought about various ways to do that (like a remote server or Alexa skill) and decided to go with three buttons. I don't think I had enough pins left over to add an LCD screen so I had to get smart with how to do this so that it made sense without a screen, and I think I came up with a good solution.
 
-Most of my program involves logic depending on the temperature reading and the range it falls in. The acceptable temperature range gets hardcoded into the program. When Kevin brews a new beer I'll change the values in the program and upload it again. But now that I'm done building the thing Kevin has decided he wants a way to change the range himself. The first 24 hours the beer will need to be in one range and then for several days after it will need to be in another. My first thought was that I could drastically simplify the whole thing and just send the temperature to ThingSpeak and let ThingSpeak analize the temp - if it's under or over certain values trigger the IFTTT. However, that would require Kevin getting into the ThingSpeak React apps online and fiddling with fields and he's soooo not a computer guy and isn't going to do well with that. So I'm going to think up another way to do this. 
+During normal funciton the RGB LED slowly blinks blue, red, or green depending if the temp is too cold, too hot or just right. It glows solid purple while it's taking a temp and uploading it to the internet so you know it's busy. Here's where I changed things: the white button is the edit button - press it once and the LED rapidly flashes blue for a second then glows solid blue to let you know you're editing the lower range. Press the blue button to decrease the lower range by 1 degree and it flashes blue for a second as confirmation. Press the red button to increase the lower range by 1 and it flashes red for a second as confirmation. Press the edit button again and it flashes then glows red letting you know you're editing the upper range. Blue and red buttons work the same - blue button decreases upper range, red button increases it. Press the edit button again and the program leaves edit mode. Finishing the edit mode also triggers the program to take an immediate temp reading and will text you the new range values so you know if you set it right. I think the one LED does a pretty good job of communicating a lot of different states and actions. 
 
-Eventually I'd like to communicate with the device away remotely - either with a remote server or through an Alexa skill, but I don't know enough about the security issues with setting up remote servers so until I know more I'm not messing with that! The Alexa skill seems like an interesting challenge, though. I could say, "Alexa, set the temp sensor's upper range to 70 degrees" or something. 
+You can see the code for the new version in the file `beer_temp_with_buttons.ino`

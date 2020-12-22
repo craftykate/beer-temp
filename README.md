@@ -212,7 +212,7 @@ That's it! That's all the hardware. Hopefully you're able to upload a basic blin
 
 Little guy in all its breadboardy glory:<br/>
 ![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_version.JPG) <br/>
-I ended up adding buttons (see [But Wait, There's More](#butwait) so Kevin could adjust the upper and lower range himself without me needing to connect the device to the computer! Here it is in its final state without the ESP8266 and then with the ESP8266 so you can see the connections underneath it:
+I ended up adding buttons (see [But Wait, There's More](#butwait)) so Kevin could adjust the upper and lower range himself without me needing to connect the device to the computer! Here it is in its final state without the ESP8266 and then with the ESP8266 so you can see the connections underneath it:
 ![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_final_1.JPG) 
 ![temp sensor](https://github.com/craftykate/beer-temp/blob/master/images/breadboard_final_with_esp_1.JPG) <br/>
 All I need to do now is build a permanent enclosure!

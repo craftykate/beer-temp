@@ -165,7 +165,7 @@ The longest leg connects to ground, the other legs connect to pins on your board
 If you're playing along at home, I connected the red leg to pin 12, the green leg to pin 13 and the blue leg to pin 16.
 
 **Test it out with some code** <br/>
-Before your setup function establish which color goes to which pins (change the numbers depending on which pins your legs are plugged into:
+Before your setup function establish which color goes to which pins (change the numbers depending on which pins your legs are plugged into):
 ```c++
 // LED pins
 int RedPin = 12;
